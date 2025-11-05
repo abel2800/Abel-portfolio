@@ -1,0 +1,25 @@
+# Assets Folder
+
+Place your images and files here:
+
+- `abel-hero.png` - Your hero section image
+- `abel-cv.pdf` - Your CV/Resume PDF
+- Project images for the portfolio
+
+## Required Assets:
+
+1. **Hero Image**: `abel-hero.png`
+   - Recommended size: 600x600px or larger
+   - Format: PNG with transparent background preferred
+   - Apply neon effects or use as-is
+
+2. **CV/Resume**: `abel-cv.pdf`
+   - Your professional CV in PDF format
+
+3. **Project Images** (Optional):
+   - `campushub.png`
+   - `logistics.png`
+   - `pickpick.png`
+   - `bible.png`
+   - Recommended size: 800x600px
+
