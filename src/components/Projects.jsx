@@ -73,20 +73,21 @@ const quests = [
     icon: '🎮',
     color: 'red',
   },
-  {
-    id: 'Q-006',
-    title: 'Abel Quest Portfolio',
-    subtitle: 'CURRENT BUILD',
-    difficulty: '★★★☆☆',
-    reward: '+300 XP',
-    status: 'ACTIVE',
-    description:
-      'This very site — an 8-bit RPG adventure portfolio with boot screen, quest board, skill tree, and character stats. Built with React, Vite, and Framer Motion.',
-    tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
-    github: null,
-    icon: '⚔️',
-    color: 'blue',
-  },
+    {
+      id: 'Q-006',
+      title: 'Abel Quest Portfolio',
+      subtitle: 'CURRENT BUILD',
+      difficulty: '★★★☆☆',
+      reward: '+300 XP',
+      status: 'ACTIVE',
+      description:
+        'This very site — an 8-bit RPG adventure portfolio with boot screen, quest board, skill tree, and character stats. Built with React, Vite, and Framer Motion.',
+      tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
+      github: 'https://github.com/abel2800/Abel-portfolio',
+      live: 'https://abel-portfolio.vercel.app',
+      icon: '⚔️',
+      color: 'blue',
+    },
 ]
 
 const Projects = () => {
