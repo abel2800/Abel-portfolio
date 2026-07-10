@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -9,27 +9,31 @@ import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
+import GameHUD from './components/ui/GameHUD'
+import Scanlines from './components/ui/Scanlines'
+import BootScreen from './components/ui/BootScreen'
 
 function App() {
-  useEffect(() => {
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault()
-        const target = document.querySelector(this.getAttribute('href'))
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          })
-        }
-      })
-    })
-  }, [])
+  const [gameStarted, setGameStarted] = useState(false)
+
+  const handleStart = () => {
+    setGameStarted(true)
+  }
+
+  if (!gameStarted) {
+    return (
+      <>
+        <CustomCursor />
+        <BootScreen onStart={handleStart} />
+      </>
+    )
+  }
 
   return (
     <div className="App">
       <CustomCursor />
+      <Scanlines />
+      <GameHUD />
       <Navbar />
       <Hero />
       <About />
@@ -44,4 +48,3 @@ function App() {
 }
 
 export default App
-

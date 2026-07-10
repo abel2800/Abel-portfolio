@@ -1,188 +1,180 @@
 import { motion } from 'framer-motion'
-import { 
-  FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaPython, 
-  FaGitAlt, FaGithub, FaFigma, FaDatabase 
+import PixelBox from './ui/PixelBox'
+import {
+  FaReact, FaNodeJs, FaJs, FaJava, FaPython,
+  FaGitAlt, FaGithub, FaFigma, FaHtml5, FaCss3Alt,
+  FaDocker, FaLinux,
 } from 'react-icons/fa'
-import { 
-  SiTailwindcss, SiExpress, SiPostgresql, SiMongodb, 
-  SiVisualstudiocode, SiNextdotjs 
+import {
+  SiTailwindcss, SiExpress, SiPostgresql, SiMongodb,
+  SiNextdotjs, SiFlutter, SiTypescript, SiSharp, SiDart,
+  SiUnity, SiAndroidstudio, SiFirebase, SiVite,
+  SiVisualstudiocode, SiSocketdotio, SiPostman,
+  SiFramer, SiNpm, SiVercel,
 } from 'react-icons/si'
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Frontend Development",
-      icon: <FaReact />,
-      color: "neon-cyan",
-      skills: [
-        { name: "React", level: 90, icon: <FaReact /> },
-        { name: "Tailwind CSS", level: 95, icon: <SiTailwindcss /> },
-        { name: "HTML5", level: 95, icon: <FaHtml5 /> },
-        { name: "CSS3", level: 90, icon: <FaCss3Alt /> },
-        { name: "JavaScript", level: 88, icon: <FaJs /> },
-      ]
-    },
-    {
-      title: "Backend Development",
-      icon: <FaNodeJs />,
-      color: "neon-purple",
-      skills: [
-        { name: "Node.js", level: 85, icon: <FaNodeJs /> },
-        { name: "Express", level: 82, icon: <SiExpress /> },
-        { name: "PostgreSQL", level: 80, icon: <SiPostgresql /> },
-        { name: "MongoDB", level: 78, icon: <SiMongodb /> },
-      ]
-    },
-    {
-      title: "Tools & Technologies",
-      icon: <FaGitAlt />,
-      color: "neon-cyan",
-      skills: [
-        { name: "Git", level: 92, icon: <FaGitAlt /> },
-        { name: "GitHub", level: 90, icon: <FaGithub /> },
-        { name: "Figma", level: 85, icon: <FaFigma /> },
-        { name: "VS Code", level: 95, icon: <SiVisualstudiocode /> },
-      ]
-    },
-    {
-      title: "Soft Skills",
-      icon: <FaPython />,
-      color: "neon-purple",
-      skills: [
-        { name: "Fast Learner", level: 95 },
-        { name: "Leadership", level: 88 },
-        { name: "Cross-Cultural Communication", level: 92 },
-        { name: "Problem Solving", level: 90 },
-      ]
-    }
+  const inventory = [
+    { name: 'React', icon: <FaReact />, rarity: 'legendary', color: '#61DAFB' },
+    { name: 'TypeScript', icon: <SiTypescript />, rarity: 'legendary', color: '#3178C6' },
+    { name: 'Next.js', icon: <SiNextdotjs />, rarity: 'epic', color: '#ffffff' },
+    { name: 'Tailwind', icon: <SiTailwindcss />, rarity: 'rare', color: '#06B6D4' },
+    { name: 'HTML5', icon: <FaHtml5 />, rarity: 'common', color: '#E34F26' },
+    { name: 'CSS3', icon: <FaCss3Alt />, rarity: 'common', color: '#1572B6' },
+    { name: 'JavaScript', icon: <FaJs />, rarity: 'legendary', color: '#F7DF1E' },
+    { name: 'Node.js', icon: <FaNodeJs />, rarity: 'epic', color: '#339933' },
+    { name: 'Express', icon: <SiExpress />, rarity: 'rare', color: '#ffffff' },
+    { name: 'PostgreSQL', icon: <SiPostgresql />, rarity: 'epic', color: '#4169E1' },
+    { name: 'MongoDB', icon: <SiMongodb />, rarity: 'rare', color: '#47A248' },
+    { name: 'Socket.io', icon: <SiSocketdotio />, rarity: 'rare', color: '#010101' },
+    { name: 'Flutter', icon: <SiFlutter />, rarity: 'epic', color: '#02569B' },
+    { name: 'Dart', icon: <SiDart />, rarity: 'epic', color: '#0175C2' },
+    { name: 'Android Studio', icon: <SiAndroidstudio />, rarity: 'epic', color: '#3DDC84' },
+    { name: 'Firebase', icon: <SiFirebase />, rarity: 'rare', color: '#FFCA28' },
+    { name: 'C#', icon: <SiSharp />, rarity: 'epic', color: '#9B4F96' },
+    { name: 'Unity', icon: <SiUnity />, rarity: 'legendary', color: '#ffffff' },
+    { name: 'Java', icon: <FaJava />, rarity: 'rare', color: '#007396' },
+    { name: 'Python', icon: <FaPython />, rarity: 'rare', color: '#3776AB' },
+    { name: 'Vite', icon: <SiVite />, rarity: 'rare', color: '#646CFF' },
+    { name: 'Framer Motion', icon: <SiFramer />, rarity: 'rare', color: '#0055FF' },
+    { name: 'VS Code', icon: <SiVisualstudiocode />, rarity: 'common', color: '#007ACC' },
+    { name: 'Git', icon: <FaGitAlt />, rarity: 'common', color: '#F05032' },
+    { name: 'GitHub', icon: <FaGithub />, rarity: 'common', color: '#ffffff' },
+    { name: 'Docker', icon: <FaDocker />, rarity: 'rare', color: '#2496ED' },
+    { name: 'Postman', icon: <SiPostman />, rarity: 'common', color: '#FF6C37' },
+    { name: 'Figma', icon: <FaFigma />, rarity: 'rare', color: '#F24E1E' },
+    { name: 'Linux', icon: <FaLinux />, rarity: 'rare', color: '#FCC624' },
+    { name: 'npm', icon: <SiNpm />, rarity: 'common', color: '#CB3837' },
+    { name: 'Vercel', icon: <SiVercel />, rarity: 'rare', color: '#ffffff' },
   ]
 
-  const techIcons = [
-    { icon: <FaReact />, name: "React", color: "#61DAFB" },
-    { icon: <FaNodeJs />, name: "Node.js", color: "#339933" },
-    { icon: <FaPython />, name: "Python", color: "#3776AB" },
-    { icon: <FaJs />, name: "JavaScript", color: "#F7DF1E" },
-    { icon: <FaHtml5 />, name: "HTML5", color: "#E34F26" },
-    { icon: <FaCss3Alt />, name: "CSS3", color: "#1572B6" },
-    { icon: <SiTailwindcss />, name: "Tailwind", color: "#06B6D4" },
-    { icon: <FaGitAlt />, name: "Git", color: "#F05032" },
-    { icon: <SiPostgresql />, name: "PostgreSQL", color: "#4169E1" },
-    { icon: <SiMongodb />, name: "MongoDB", color: "#47A248" },
-    { icon: <FaFigma />, name: "Figma", color: "#F24E1E" },
-    { icon: <SiNextdotjs />, name: "Next.js", color: "#ffffff" },
+  const rarityColors = {
+    common: 'border-gray-500',
+    rare: 'border-pixel-blue',
+    epic: 'border-pixel-purple',
+    legendary: 'border-pixel-gold',
+  }
+
+  const skillTrees = [
+    {
+      title: '⚔️ FRONTEND ARSENAL',
+      color: 'blue',
+      skills: [
+        { name: 'React / Next.js', level: 90 },
+        { name: 'Tailwind CSS', level: 95 },
+        { name: 'HTML5 / CSS3 / JS', level: 93 },
+        { name: 'Framer Motion', level: 85 },
+      ],
+    },
+    {
+      title: '🛡️ BACKEND FORTRESS',
+      color: 'green',
+      skills: [
+        { name: 'Node.js / Express', level: 85 },
+        { name: 'TypeScript', level: 88 },
+        { name: 'PostgreSQL', level: 80 },
+        { name: 'MongoDB / Socket.io', level: 78 },
+      ],
+    },
+    {
+      title: '📱 MOBILE & GAME DEV',
+      color: 'purple',
+      skills: [
+        { name: 'Flutter / Dart', level: 85 },
+        { name: 'Android Studio', level: 82 },
+        { name: 'Unity / C#', level: 80 },
+        { name: 'Firebase', level: 78 },
+      ],
+    },
+    {
+      title: '🔧 TOOLKIT',
+      color: 'gold',
+      skills: [
+        { name: 'Git / GitHub', level: 92 },
+        { name: 'VS Code', level: 95 },
+        { name: 'Docker / Linux', level: 75 },
+        { name: 'Figma / Postman', level: 85 },
+      ],
+    },
   ]
 
   return (
     <section id="skills" className="py-20 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-cyan-900/5 to-dark-bg"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6">
+        <div className="section-header">
+          <span className="section-tag">INVENTORY</span>
+          <h2 className="section-title">SKILL TREE</h2>
+          <div className="section-divider">━━━━━ ⚔️ ━━━━━</div>
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: false }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <h2 className="text-5xl md:text-6xl font-orbitron font-bold text-glow-purple mb-4">
-            Skills & Tech Stack
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-neon-cyan to-neon-purple mx-auto"></div>
+          <PixelBox title="EQUIPPED ITEMS" color="gold">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+              {inventory.map((item, i) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: i * 0.03 }}
+                  viewport={{ once: false }}
+                  whileHover={{ scale: 1.1, y: -4 }}
+                  className={`inventory-slot cursor-hover border-3 ${rarityColors[item.rarity]}`}
+                >
+                  <div className="text-3xl mb-1" style={{ color: item.color }}>{item.icon}</div>
+                  <p className="font-pixel text-[0.3rem] text-gray-300 leading-tight">{item.name}</p>
+                  <p className={`text-[0.55rem] mt-1 ${
+                    item.rarity === 'legendary' ? 'text-pixel-gold' :
+                    item.rarity === 'epic' ? 'text-pixel-purple' :
+                    item.rarity === 'rare' ? 'text-pixel-blue' : 'text-gray-500'
+                  }`}>{item.rarity.toUpperCase()}</p>
+                </motion.div>
+              ))}
+            </div>
+          </PixelBox>
         </motion.div>
 
-        {/* Skill Categories Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {skillCategories.map((category, index) => (
+        <div className="grid md:grid-cols-2 gap-6">
+          {skillTrees.map((tree, ti) => (
             <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 50 }}
+              key={tree.title}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: ti * 0.1 }}
               viewport={{ once: false }}
-              className="glass-dark p-8 rounded-2xl hover:neon-glow-purple transition-all duration-300"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className={`text-4xl text-${category.color}`}>
-                  {category.icon}
-                </div>
-                <h3 className="text-2xl font-orbitron font-bold">{category.title}</h3>
-              </div>
-
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="flex items-center gap-2">
-                        {skill.icon && <span className="text-xl text-neon-cyan">{skill.icon}</span>}
-                        <span className="font-rajdhani text-lg">{skill.name}</span>
+              <PixelBox title={tree.title} color={tree.color}>
+                <div className="space-y-4">
+                  {tree.skills.map((skill, si) => (
+                    <div key={skill.name}>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-lg">{skill.name}</span>
+                        <span className="font-pixel text-[0.4rem] text-pixel-green">LV.{skill.level}</span>
                       </div>
-                      <span className="text-neon-purple font-semibold">{skill.level}%</span>
+                      <div className="stat-bar-pixel">
+                        <motion.div
+                          className="stat-bar-pixel-fill"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          transition={{ duration: 0.8, delay: si * 0.1 }}
+                          viewport={{ once: false }}
+                        />
+                      </div>
                     </div>
-                    <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: skillIndex * 0.1 }}
-                        viewport={{ once: false }}
-                        className="h-full bg-gradient-to-r from-neon-purple to-neon-cyan rounded-full"
-                        style={{
-                          boxShadow: '0 0 10px rgba(139, 92, 246, 0.5)',
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </PixelBox>
             </motion.div>
           ))}
         </div>
-
-        {/* Tech Icons Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: false }}
-          className="glass-dark p-8 rounded-2xl"
-        >
-          <h3 className="text-3xl font-orbitron font-bold text-center mb-8 text-glow-cyan">
-            Technologies I Work With
-          </h3>
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-6">
-            {techIcons.map((tech, index) => (
-              <motion.div
-                key={tech.name}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: false }}
-                whileHover={{ 
-                  scale: 1.2, 
-                  rotate: 360,
-                  transition: { duration: 0.3 }
-                }}
-                className="flex flex-col items-center justify-center p-4 glass rounded-lg cursor-hover group relative"
-              >
-                <div 
-                  className="text-4xl mb-2 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.8)]"
-                  style={{ color: tech.color }}
-                >
-                  {tech.icon}
-                </div>
-                <span className="text-xs text-gray-400 text-center">{tech.name}</span>
-                
-                {/* Hover tooltip */}
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-neon-purple px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                  {tech.name}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   )
 }
 
 export default Skills
-

@@ -1,162 +1,175 @@
-import { motion } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt, FaStar } from 'react-icons/fa'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import PixelBox from './ui/PixelBox'
+
+const quests = [
+  {
+    id: 'Q-001',
+    title: 'GUZO',
+    subtitle: 'MAIN QUEST',
+    difficulty: '★★★★★',
+    reward: '+1000 XP',
+    status: 'COMPLETED',
+    description:
+      'Flagship Ethiopian logistics ecosystem — Cainiao-inspired platform with customer app, driver app, merchant dashboard, admin panel, warehouse management, live tracking, route optimization, and Ethiopian payment integration.',
+    tags: ['TypeScript', 'Logistics', 'Full-Stack', 'Mobile'],
+    github: 'https://github.com/abel2800/Guzo',
+    icon: '🚚',
+    color: 'gold',
+  },
+  {
+    id: 'Q-002',
+    title: 'Ethiopian Global Logistics',
+    subtitle: 'EPIC QUEST',
+    difficulty: '★★★★☆',
+    reward: '+500 XP',
+    status: 'COMPLETED',
+    description:
+      'Complete logistics tracking and order management system with real-time updates, analytics dashboards, and end-to-end supply chain tools built for Ethiopian operations.',
+    tags: ['JavaScript', 'Full-Stack', 'Logistics', 'Tracking'],
+    github: 'https://github.com/abel2800/Ethiopian-global-logistics',
+    icon: '🌍',
+    color: 'blue',
+  },
+  {
+    id: 'Q-003',
+    title: 'Bible Pulse',
+    subtitle: 'EPIC QUEST',
+    difficulty: '★★★★★',
+    reward: '+600 XP',
+    status: 'COMPLETED',
+    description:
+      'Cross-platform Flutter Bible study app with KJV, ASV, and Amharic translations. Daily devotionals, reading plans, bookmarks, notes, highlights, and a hymns library.',
+    tags: ['Flutter', 'Dart', 'Mobile', 'Amharic'],
+    github: 'https://github.com/abel2800/Bible-Pulse-Amharic-Bible-',
+    icon: '📖',
+    color: 'green',
+  },
+  {
+    id: 'Q-004',
+    title: 'Campus Hub',
+    subtitle: 'MAIN QUEST',
+    difficulty: '★★★★☆',
+    reward: '+500 XP',
+    status: 'COMPLETED',
+    description:
+      'Learning Management System built as a graduation capstone — course management, student tools, and a platform designed to replace complaining about the school LMS with actually shipping one.',
+    tags: ['JavaScript', 'LMS', 'Education', 'Full-Stack'],
+    github: 'https://github.com/abel2800/Campus-Hub',
+    icon: '🏫',
+    color: 'purple',
+  },
+  {
+    id: 'Q-005',
+    title: 'Rust-Town',
+    subtitle: 'SIDE QUEST',
+    difficulty: '★★★☆☆',
+    reward: '+400 XP',
+    status: 'COMPLETED',
+    description:
+      'A shooting game built in C# — because sometimes you need to blow off steam in code, not in real life. Yes, it is C# not Rust. Naming things is hard.',
+    tags: ['C#', 'Game Dev', 'Unity', 'Shooting'],
+    github: 'https://github.com/abel2800/Rust-Town',
+    icon: '🎮',
+    color: 'red',
+  },
+  {
+    id: 'Q-006',
+    title: 'Abel Quest Portfolio',
+    subtitle: 'CURRENT BUILD',
+    difficulty: '★★★☆☆',
+    reward: '+300 XP',
+    status: 'ACTIVE',
+    description:
+      'This very site — an 8-bit RPG adventure portfolio with boot screen, quest board, skill tree, and character stats. Built with React, Vite, and Framer Motion.',
+    tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
+    github: null,
+    icon: '⚔️',
+    color: 'blue',
+  },
+]
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "CampusHub",
-      description: "E-learning and social media platform designed to connect students, facilitate learning, and build communities. Features include course management, social feeds, and real-time chat.",
-      tags: ["React", "Node.js", "PostgreSQL", "Socket.io"],
-      github: "https://github.com/abel2800/Campus-Hub",
-      live: "https://github.com/abel2800/Campus-Hub",
-      stars: 124,
-      gradient: "from-neon-purple to-pink-500",
-      image: "/assets/campushub.png"
-    },
-    {
-      title: "Ethiopian Global Logistics",
-      description: "Complete Ethiopian Global Logistics System - Full-stack logistics tracking and order management platform with real-time updates and analytics.",
-      tags: ["JavaScript", "Full-Stack", "Logistics", "Tracking"],
-      github: "https://github.com/abel2800/Ethiopian-global-logistics",
-      live: "https://github.com/abel2800/Ethiopian-global-logistics",
-      stars: 89,
-      gradient: "from-neon-cyan to-blue-500",
-      image: "/assets/logistics.png"
-    },
-    {
-      title: "Bible Pulse - Amharic Bible",
-      description: "Beautiful cross-platform Bible study app built with Flutter featuring multiple translations (KJV, ASV, Amharic), daily devotionals, reading plans, bookmarks, notes, and hymns library.",
-      tags: ["Flutter", "Dart", "Mobile", "Cross-Platform"],
-      github: "https://github.com/abel2800/Bible-Pulse-Amharic-Bible-",
-      live: "https://github.com/abel2800/Bible-Pulse-Amharic-Bible-",
-      stars: 156,
-      gradient: "from-neon-cyan to-green-500",
-      image: "/assets/bible.png"
+  const [selectedQuest, setSelectedQuest] = useState(null)
+
+  const handleQuestClick = (quest) => {
+    if (quest.github) {
+      window.open(quest.github, '_blank', 'noopener,noreferrer')
+      return
     }
-  ]
+    setSelectedQuest(quest)
+  }
 
   return (
     <section id="projects" className="py-20 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-purple-900/5 to-dark-bg"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: false }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl md:text-6xl font-orbitron font-bold text-glow-cyan mb-4">
-            Featured Projects
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-neon-purple to-neon-cyan mx-auto mb-6"></div>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            A collection of projects that showcase my skills and passion for building innovative solutions
+      <div className="container mx-auto px-6">
+        <div className="section-header">
+          <span className="section-tag">QUEST BOARD</span>
+          <h2 className="section-title">ACTIVE QUESTS</h2>
+          <div className="section-divider">━━━━━ 📜 ━━━━━</div>
+          <p className="text-xl text-gray-400 mt-4 max-w-2xl mx-auto">
+            Click any quest to open its GitHub repository. Local-only builds open a detail scroll.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {quests.map((quest, i) => (
             <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
+              key={quest.id}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: false }}
-              className="group relative"
+              onClick={() => handleQuestClick(quest)}
+              className="quest-card cursor-hover p-6"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && handleQuestClick(quest)}
             >
-              <div className="glass-dark rounded-2xl overflow-hidden hover:neon-glow-purple transition-all duration-300 h-full flex flex-col">
-                {/* Project Image */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br ${project.gradient} p-[2px]">
-                  <div className="w-full h-full bg-dark-card flex items-center justify-center">
-                    {/* Placeholder - Replace with actual image */}
-                    <div className={`w-full h-full bg-gradient-to-br ${project.gradient} opacity-20 flex items-center justify-center`}>
-                      <div className="text-center p-6">
-                        <div className="text-6xl mb-4">🚀</div>
-                        <p className="text-white/60 text-sm">Project Preview</p>
-                      </div>
-                    </div>
-                    {/* Uncomment when images are added */}
-                    {/* <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    /> */}
-                  </div>
-                  
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                    <motion.a
-                      href={project.github}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 rounded-full bg-neon-purple flex items-center justify-center cursor-hover neon-glow-purple"
-                    >
-                      <FaGithub className="text-xl" />
-                    </motion.a>
-                    <motion.a
-                      href={project.live}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 rounded-full bg-neon-cyan flex items-center justify-center cursor-hover neon-glow-cyan"
-                    >
-                      <FaExternalLinkAlt className="text-xl" />
-                    </motion.a>
-                  </div>
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-2xl font-orbitron font-bold text-glow-cyan group-hover:text-neon-cyan transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center gap-1 text-yellow-400">
-                      <FaStar />
-                      <span className="font-semibold">{project.stars}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-300 mb-4 flex-1">
-                    {project.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-sm bg-gradient-to-r from-neon-purple/20 to-neon-cyan/20 border border-neon-purple/30 rounded-full text-neon-cyan font-rajdhani"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="flex justify-between items-start mb-4">
+                <span className="font-pixel text-[0.4rem] text-pixel-blue">{quest.id}</span>
+                <span
+                  className={`font-pixel text-[0.35rem] px-2 py-1 border-2 ${
+                    quest.status === 'COMPLETED'
+                      ? 'border-pixel-green text-pixel-green'
+                      : 'border-pixel-gold text-pixel-gold'
+                  }`}
+                >
+                  {quest.status}
+                </span>
               </div>
 
-              {/* Decorative corner */}
-              <motion.div
-                className="absolute -bottom-2 -right-2 w-16 h-16 border-4 border-neon-cyan rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                animate={{
-                  rotate: [0, 90],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              />
+              <div className="text-5xl mb-4 text-center">{quest.icon}</div>
+
+              <p className="font-pixel text-[0.35rem] text-pixel-purple mb-1">{quest.subtitle}</p>
+              <h3 className="font-pixel text-[0.6rem] text-pixel-gold mb-2 leading-relaxed">{quest.title}</h3>
+
+              <div className="flex justify-between items-center mb-4">
+                <span className="quest-difficulty text-pixel-gold">{quest.difficulty}</span>
+                <span className="text-lg text-pixel-green">{quest.reward}</span>
+              </div>
+
+              <p className="text-lg text-gray-400 line-clamp-3">{quest.description}</p>
+
+              <div className="flex flex-wrap gap-2 mt-4">
+                {quest.tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className="text-sm px-2 py-0.5 bg-pixel-dark border border-gray-600 text-pixel-blue">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <p className="font-pixel text-[0.35rem] text-gray-500 mt-4 animate-blink">
+                {quest.github ? '▶ CLICK → OPEN GITHUB REPO' : '▶ CLICK FOR DETAILS'}
+              </p>
             </motion.div>
           ))}
         </div>
 
-        {/* View More */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: false }}
           className="text-center mt-12"
         >
@@ -164,16 +177,64 @@ const Projects = () => {
             href="https://github.com/abel2800"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 glass border-2 border-neon-purple rounded-lg font-rajdhani font-semibold text-lg cursor-hover hover:neon-glow-purple hover:scale-105 transition-all duration-300"
+            className="pixel-btn pixel-btn-green cursor-hover"
           >
-            <FaGithub className="text-2xl" />
-            <span>View More on GitHub</span>
+            🗃️ VIEW ALL REPOS ON GITHUB
           </a>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedQuest && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80"
+            onClick={() => setSelectedQuest(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-lg w-full"
+            >
+              <PixelBox title={`QUEST: ${selectedQuest.id}`} color={selectedQuest.color}>
+                <div className="text-6xl text-center mb-4">{selectedQuest.icon}</div>
+                <h3 className="font-pixel text-[0.7rem] text-pixel-gold mb-2 text-center leading-relaxed">
+                  {selectedQuest.title}
+                </h3>
+                <p className="text-xl text-gray-300 mb-4 leading-relaxed">{selectedQuest.description}</p>
+
+                <div className="flex justify-between mb-4 text-lg">
+                  <span className="text-pixel-gold">{selectedQuest.difficulty}</span>
+                  <span className="text-pixel-green">{selectedQuest.reward}</span>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedQuest.tags.map((tag) => (
+                    <span key={tag} className="text-sm px-2 py-1 bg-pixel-dark border border-pixel-blue text-pixel-blue">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4 justify-center">
+                  <button
+                    onClick={() => setSelectedQuest(null)}
+                    className="pixel-btn pixel-btn-gold cursor-hover text-[0.5rem]"
+                  >
+                    ✕ CLOSE
+                  </button>
+                </div>
+              </PixelBox>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
 
 export default Projects
-
