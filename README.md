@@ -39,11 +39,15 @@ Open [http://localhost:5173](http://localhost:5173).
 src/
 ├── components/       # Page sections
 │   └── ui/           # Shared UI (BootScreen, GameHUD, etc.)
+├── data/
+│   └── projects.js   # Quest board mapped to workspace folders
 ├── App.jsx
 ├── main.jsx
 └── index.css
 public/assets/        # Images and CV
 ```
+
+The quest board lists every real project folder next to this portfolio (`ME`).
 
 ## License
 

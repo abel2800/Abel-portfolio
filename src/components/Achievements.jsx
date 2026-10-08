@@ -25,7 +25,7 @@ const Achievements = () => {
       desc: 'Cross-platform Amharic + English Bible app with devotionals, reading plans, and hymns',
       rarity: 'epic',
       year: '2024',
-      link: 'https://github.com/abel2800/Bible-Pulse-Amharic-Bible-',
+      link: 'https://github.com/abel2800/Bible-Plus',
     },
     {
       icon: '🎮',
@@ -46,7 +46,7 @@ const Achievements = () => {
     {
       icon: '⭐',
       title: 'Open Source Grinder',
-      desc: '13+ public repos on GitHub — products with real users, real payments, real traffic',
+      desc: '14 public repos on GitHub — logistics, ride-hailing, campus, creators, mobile, and games',
       rarity: 'rare',
       year: '2024',
       link: 'https://github.com/abel2800',
@@ -62,7 +62,7 @@ const Achievements = () => {
   const stats = [
     { icon: '📚', value: '2+', label: 'Years Active' },
     { icon: '🚀', value: '6+', label: 'Epic Builds' },
-    { icon: '💻', value: '13+', label: 'GitHub Repos' },
+    { icon: '💻', value: '14', label: 'GitHub Repos' },
     { icon: '🛠️', value: '8+', label: 'Tech Stacks' },
   ]
 

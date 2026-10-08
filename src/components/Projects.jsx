@@ -1,104 +1,24 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PixelBox from './ui/PixelBox'
-
-const quests = [
-  {
-    id: 'Q-001',
-    title: 'GUZO',
-    subtitle: 'MAIN QUEST',
-    difficulty: '★★★★★',
-    reward: '+1000 XP',
-    status: 'COMPLETED',
-    description:
-      'Flagship Ethiopian logistics ecosystem — Cainiao-inspired platform with customer app, driver app, merchant dashboard, admin panel, warehouse management, live tracking, route optimization, and Ethiopian payment integration.',
-    tags: ['TypeScript', 'Logistics', 'Full-Stack', 'Mobile'],
-    github: 'https://github.com/abel2800/Guzo',
-    icon: '🚚',
-    color: 'gold',
-  },
-  {
-    id: 'Q-002',
-    title: 'Ethiopian Global Logistics',
-    subtitle: 'EPIC QUEST',
-    difficulty: '★★★★☆',
-    reward: '+500 XP',
-    status: 'COMPLETED',
-    description:
-      'Complete logistics tracking and order management system with real-time updates, analytics dashboards, and end-to-end supply chain tools built for Ethiopian operations.',
-    tags: ['JavaScript', 'Full-Stack', 'Logistics', 'Tracking'],
-    github: 'https://github.com/abel2800/Ethiopian-global-logistics',
-    icon: '🌍',
-    color: 'blue',
-  },
-  {
-    id: 'Q-003',
-    title: 'Bible Pulse',
-    subtitle: 'EPIC QUEST',
-    difficulty: '★★★★★',
-    reward: '+600 XP',
-    status: 'COMPLETED',
-    description:
-      'Cross-platform Flutter Bible study app with KJV, ASV, and Amharic translations. Daily devotionals, reading plans, bookmarks, notes, highlights, and a hymns library.',
-    tags: ['Flutter', 'Dart', 'Mobile', 'Amharic'],
-    github: 'https://github.com/abel2800/Bible-Pulse-Amharic-Bible-',
-    icon: '📖',
-    color: 'green',
-  },
-  {
-    id: 'Q-004',
-    title: 'Campus Hub',
-    subtitle: 'MAIN QUEST',
-    difficulty: '★★★★☆',
-    reward: '+500 XP',
-    status: 'COMPLETED',
-    description:
-      'Learning Management System built as a graduation capstone — course management, student tools, and a platform designed to replace complaining about the school LMS with actually shipping one.',
-    tags: ['JavaScript', 'LMS', 'Education', 'Full-Stack'],
-    github: 'https://github.com/abel2800/Campus-Hub',
-    icon: '🏫',
-    color: 'purple',
-  },
-  {
-    id: 'Q-005',
-    title: 'Rust-Town',
-    subtitle: 'SIDE QUEST',
-    difficulty: '★★★☆☆',
-    reward: '+400 XP',
-    status: 'COMPLETED',
-    description:
-      'A shooting game built in C# — because sometimes you need to blow off steam in code, not in real life. Yes, it is C# not Rust. Naming things is hard.',
-    tags: ['C#', 'Game Dev', 'Unity', 'Shooting'],
-    github: 'https://github.com/abel2800/Rust-Town',
-    icon: '🎮',
-    color: 'red',
-  },
-    {
-      id: 'Q-006',
-      title: 'Abel Quest Portfolio',
-      subtitle: 'CURRENT BUILD',
-      difficulty: '★★★☆☆',
-      reward: '+300 XP',
-      status: 'ACTIVE',
-      description:
-        'This very site — an 8-bit RPG adventure portfolio with boot screen, quest board, skill tree, and character stats. Built with React, Vite, and Framer Motion.',
-      tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
-      github: 'https://github.com/abel2800/Abel-portfolio',
-      live: 'https://abel-portfolio.vercel.app',
-      icon: '⚔️',
-      color: 'blue',
-    },
-]
+import { categories, quests } from '../data/projects'
 
 const Projects = () => {
   const [selectedQuest, setSelectedQuest] = useState(null)
+  const [filter, setFilter] = useState('all')
+
+  const visibleQuests = useMemo(
+    () => (filter === 'all' ? quests : quests.filter((q) => q.category === filter)),
+    [filter]
+  )
 
   const handleQuestClick = (quest) => {
-    if (quest.github) {
-      window.open(quest.github, '_blank', 'noopener,noreferrer')
-      return
-    }
     setSelectedQuest(quest)
+  }
+
+  const openLink = (url) => {
+    if (!url) return
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -106,20 +26,39 @@ const Projects = () => {
       <div className="container mx-auto px-6">
         <div className="section-header">
           <span className="section-tag">QUEST BOARD</span>
-          <h2 className="section-title">ACTIVE QUESTS</h2>
+          <h2 className="section-title">ALL FOLDER QUESTS</h2>
           <div className="section-divider">━━━━━ 📜 ━━━━━</div>
           <p className="text-xl text-gray-400 mt-4 max-w-2xl mx-auto">
-            Click any quest to open its GitHub repository. Local-only builds open a detail scroll.
+            Public GitHub repos plus workspace builds. Filter by class, then open a scroll for the repo, live demo, and local folder name.
           </p>
         </div>
 
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setFilter(cat.id)}
+              className={`pixel-btn cursor-hover text-[0.4rem] ${
+                filter === cat.id ? 'pixel-btn-gold' : 'pixel-btn-green'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        <p className="text-center text-lg text-pixel-gold mb-8">
+          {visibleQuests.length} QUESTS · FOLDER MAP LOADED
+        </p>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {quests.map((quest, i) => (
+          {visibleQuests.map((quest, i) => (
             <motion.div
               key={quest.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.45, delay: Math.min(i * 0.05, 0.4) }}
               viewport={{ once: false }}
               onClick={() => handleQuestClick(quest)}
               className="quest-card cursor-hover p-6"
@@ -144,6 +83,9 @@ const Projects = () => {
 
               <p className="font-pixel text-[0.35rem] text-pixel-purple mb-1">{quest.subtitle}</p>
               <h3 className="font-pixel text-[0.6rem] text-pixel-gold mb-2 leading-relaxed">{quest.title}</h3>
+              <p className="text-sm text-gray-500 mb-3">
+                {quest.repo ? `🐙 ${quest.repo}` : `📁 ${quest.folder}`}
+              </p>
 
               <div className="flex justify-between items-center mb-4">
                 <span className="quest-difficulty text-pixel-gold">{quest.difficulty}</span>
@@ -160,9 +102,7 @@ const Projects = () => {
                 ))}
               </div>
 
-              <p className="font-pixel text-[0.35rem] text-gray-500 mt-4 animate-blink">
-                {quest.github ? '▶ CLICK → OPEN GITHUB REPO' : '▶ CLICK FOR DETAILS'}
-              </p>
+              <p className="font-pixel text-[0.35rem] text-gray-500 mt-4 animate-blink">▶ CLICK FOR DETAILS</p>
             </motion.div>
           ))}
         </div>
@@ -206,6 +146,12 @@ const Projects = () => {
                 <h3 className="font-pixel text-[0.7rem] text-pixel-gold mb-2 text-center leading-relaxed">
                   {selectedQuest.title}
                 </h3>
+                <p className={`text-center text-lg text-pixel-blue ${selectedQuest.repo && selectedQuest.folder ? 'mb-1' : 'mb-4'}`}>
+                  {selectedQuest.repo ? `🐙 ${selectedQuest.repo}` : `📁 ${selectedQuest.folder}`}
+                </p>
+                {selectedQuest.repo && selectedQuest.folder && (
+                  <p className="text-center text-sm text-gray-500 mb-4">📁 {selectedQuest.folder}</p>
+                )}
                 <p className="text-xl text-gray-300 mb-4 leading-relaxed">{selectedQuest.description}</p>
 
                 <div className="flex justify-between mb-4 text-lg">
@@ -221,10 +167,29 @@ const Projects = () => {
                   ))}
                 </div>
 
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-wrap gap-3 justify-center">
+                  {selectedQuest.github && (
+                    <button
+                      type="button"
+                      onClick={() => openLink(selectedQuest.github)}
+                      className="pixel-btn pixel-btn-green cursor-hover text-[0.45rem]"
+                    >
+                      GITHUB
+                    </button>
+                  )}
+                  {selectedQuest.live && (
+                    <button
+                      type="button"
+                      onClick={() => openLink(selectedQuest.live)}
+                      className="pixel-btn pixel-btn-gold cursor-hover text-[0.45rem]"
+                    >
+                      LIVE
+                    </button>
+                  )}
                   <button
+                    type="button"
                     onClick={() => setSelectedQuest(null)}
-                    className="pixel-btn pixel-btn-gold cursor-hover text-[0.5rem]"
+                    className="pixel-btn pixel-btn-gold cursor-hover text-[0.45rem]"
                   >
                     ✕ CLOSE
                   </button>

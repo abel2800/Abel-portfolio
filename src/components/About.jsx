@@ -3,11 +3,11 @@ import PixelBox from './ui/PixelBox'
 
 const About = () => {
   const stats = [
-    { label: 'STR', name: 'Strength', value: 88, desc: 'Problem Solving' },
+    { label: 'STR', name: 'Strength', value: 100, desc: 'Problem Solving' },
     { label: 'INT', name: 'Intelligence', value: 95, desc: 'Algorithms & Logic' },
     { label: 'DEX', name: 'Dexterity', value: 92, desc: 'Code Speed' },
     { label: 'WIS', name: 'Wisdom', value: 90, desc: 'Architecture' },
-    { label: 'CHA', name: 'Charisma', value: 87, desc: 'Communication' },
+    { label: 'CHA', name: 'Charisma', value: 100, desc: 'Communication' },
     { label: 'LCK', name: 'Luck', value: 99, desc: 'Debugging' },
   ]
 

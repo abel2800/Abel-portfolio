@@ -6,15 +6,48 @@ import DialogueBox from './ui/DialogueBox'
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [saved, setSaved] = useState(false)
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSaved(true)
-    setTimeout(() => setSaved(false), 3000)
+    setError('')
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/absir28@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: formData.subject || 'New message from website',
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setSaved(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      setTimeout(() => setSaved(false), 5000)
+    } catch (sendError) {
+      setError('Message failed to send. Please email absir28@gmail.com directly.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contacts = [
@@ -120,8 +153,12 @@ const Contact = () => {
                   />
                 </div>
 
-                <button type="submit" className="pixel-btn pixel-btn-gold cursor-hover w-full justify-center">
-                  📨 SEND SCROLL
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="pixel-btn pixel-btn-gold cursor-hover w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? '📨 SENDING...' : '📨 SEND SCROLL'}
                 </button>
 
                 {saved && (
@@ -132,6 +169,10 @@ const Contact = () => {
                   >
                     ✓ GAME SAVED! Message received.
                   </motion.p>
+                )}
+
+                {error && (
+                  <p className="text-center font-pixel text-[0.45rem] text-pixel-red">{error}</p>
                 )}
               </form>
             </PixelBox>
